@@ -4,12 +4,15 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +27,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor //생성자
 @Builder //빌더패턴
 @Entity //테이블생성을위한 어노테이션 역할:User클래스가 MySQL에 테이블이 생성이된다
+//@DynamicInsert //insert시에 널값인 필드를 제외함
 public class User {
 	@Id //Primary key선언 어노테이션
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//프로젝트에서 연렬된 DB넘버링 전략을 따라간다. MYSQL이냐 ORACLE이냐
@@ -38,8 +42,10 @@ public class User {
 	@Column(nullable = false,length=50) 
 	private String email;
 	
-	@ColumnDefault("'user'") //홀따옴표주의
-	private String role; //Enum을 쓰는게 좋다. //admin, user, manager Enum=도메인설정가능(도메인이란?:ex 성별:남녀, 초등학생:1~6)
+	
+	//@ColumnDefault("'user'") //홀따옴표주의
+	@Enumerated(EnumType.STRING)//DB는 RoleType이라는게 없음
+	private RoleType role; //Enum을 쓰는게 좋다. //ADMIN, USER, manager Enum=도메인설정가능(도메인이란?:ex 성별:남녀, 초등학생:1~6)
 	
 	@CreationTimestamp //시간이 자동입력
 	private Timestamp createDate;
