@@ -2,6 +2,7 @@ package com.cos.blog.model;
 
 import java.sql.Timestamp;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -36,6 +38,8 @@ public class Reply { //답변테이블
 	@ManyToOne//한명은 여러개의 답변가능.
 	@JoinColumn(name="userId")
 	private User user;
+	
+	
 	
 	@CreationTimestamp
 	private Timestamp createDate;
