@@ -33,7 +33,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//프로젝트에서 연렬된 DB넘버링 전략을 따라간다. MYSQL이냐 ORACLE이냐
 	private int id; //시퀀스, auto_increment
 	
-	@Column(nullable = false,length=30) //컬럼 선언 및 null이 될수없다 선언
+	@Column(nullable = false,length=30, unique = true) //컬럼 선언 및 null이 될수없다 선언 유니크 키 선언
 	private String username;//아이디
 
 	@Column(nullable = false,length=100) //컬럼 선언 및 null이 될수없다 선언 =>해쉬(비밀번호 암호화) 화 할거라 넉넉하게 잡자

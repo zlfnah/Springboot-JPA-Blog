@@ -107,7 +107,7 @@ public class DummyControllerTest {
 	
 	
 	
-	//http://localhost:800/blog/dummy/join (요청)
+	//http://localhost:8000/blog/dummy/join (요청)
 	//http의 body에 username,password,email 데이터를 가지고 (요청)
 	@PostMapping("/dummy/join")
 	public String join(User user) { //@requestParam생략시 변수명 정확해야함 key=value
