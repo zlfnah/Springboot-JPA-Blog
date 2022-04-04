@@ -3,7 +3,7 @@
 server:
   port: 8000 #default값 8080
   servlet:
-    context-path: /blog #default값 /
+    context-path: / #default값 /
     encoding:
       charset: UTF-8
       enabled: true
@@ -22,7 +22,7 @@ spring:
     password: cos1234
     
   jpa:
-    open-in-view: true
+    open-in-view: true #lazy로딩이 가능하게함 false시 영속성 컨테스트종료. 즉 lazy로딩불가
     hibernate:
       ddl-auto: update #update none 등입력가능 create는 새로만든다. 즉 처음에 create후 update로 바궈야함.
       naming:
