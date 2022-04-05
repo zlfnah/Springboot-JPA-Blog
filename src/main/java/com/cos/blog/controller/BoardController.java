@@ -21,7 +21,7 @@ public class BoardController {
 		}
 
 		//USER 권한이 필요
-		@GetMapping("/board/saveForm")
+		@GetMapping("/board/saveForm") //로그인뒤 이 주소로 호출을하면 saveForm리턴으로 열리고 saveForm에서 title과 content정보를 갖고온다.
 		public String saveForm() {
 			return "board/saveForm";
 		}

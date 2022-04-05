@@ -39,8 +39,7 @@ public class Board { //게시판
 	@Lob //대용량 데이터
 	private String content;//섬머노트 라이브러리<html>태그가 섞여서 디자인이 됨 db에는 longtext로 들어감
 	
-	@ColumnDefault("0") //넘버값이니 홀따옴표 필요없음
-	private int count;
+	private int count; //조회수 BoardService에서 강제로 넣어주자.
 	
 	//FetchType.EAGER무조건갖고와라
 	@ManyToOne(fetch = FetchType.EAGER) //Many=Board, user=One 한명의 유저는 여러개의 게시그를 적을수있다. 연관관계
