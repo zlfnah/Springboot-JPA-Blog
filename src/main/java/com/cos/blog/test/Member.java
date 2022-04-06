@@ -15,6 +15,7 @@ public class Member {
 	private  String username;
 	private  String password;
 	private  String email;
+	
 	@Builder //순서에 상관없이 바꿀수있게함
 	public Member(int id, String username, String password, String email) {
 		super();
@@ -22,6 +23,7 @@ public class Member {
 		this.username = username;
 		this.password = password;
 		this.email = email;
+	
 	}
 	
 }

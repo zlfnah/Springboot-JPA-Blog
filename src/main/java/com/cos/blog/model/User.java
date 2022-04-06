@@ -42,6 +42,12 @@ public class User {
 	@Column(nullable = false,length=50) 
 	private String email;
 	
+	@Column(nullable = false,length=50) 
+	private String address;
+	
+	@Column(nullable = false,length=50) 
+	private String address_details;
+	
 	
 	//@ColumnDefault("'user'") //홀따옴표주의
 	@Enumerated(EnumType.STRING)//DB는 RoleType이라는게 없음

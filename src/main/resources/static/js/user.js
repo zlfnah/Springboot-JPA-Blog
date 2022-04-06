@@ -5,6 +5,9 @@ let index = {
 		$("#btn-save").on("click", () => { //화살표함수를 쓰는이유는 function(){}가 아닌 this를 바인딩하기위해.
 			this.save();
 		});
+			$("#btn-update").on("click", () => { //화살표함수를 쓰는이유는 function(){}가 아닌 this를 바인딩하기위해.
+			this.update();
+		});
 /*		$("#btn-login").on("click", () => { //로그인클릭 이벤트
 			this.login();
 		});//on함수는 첫번째파라미터는 이벤트 정의, 뒤에 무엇을할건지 정의.*/
@@ -14,7 +17,9 @@ let index = {
 		let data = {
 			username: $("#username").val(), //아이디값찾기.
 			password: $("#password").val(),
-			email: $("#email").val()
+			email: $("#email").val(),
+			address: $("#address").val(),
+			address_details: $("#address_details").val()
 		};
 		//console.log(data);
 
@@ -40,6 +45,31 @@ let index = {
 		// 대신 웹클라이언트는 추가적인 요청을 통해 HTML파일을 받아야한다.
 		//2번째 비동기 통신을 하기 위해서 (비동기 통신=  순서에 상관없는)
 	}, //회원가입끝
+	//회원수정시작
+	update: function() {
+		
+		let data = {
+			id: $("#id").val(),
+			password: $("#password").val(),
+			email: $("#email").val(),
+			address: $("#address").val(),
+			address_details: $("#address_details").val()
+		};
+
+		$.ajax({
+			type: "PUT",	//메소드타입
+			url: "/user", //호출  userApicontroller
+			data: JSON.stringify(data), //http body데이터
+			contentType: "application/json; charset=utf-8", //너가 보낸 body데이터  타입은 이거야 라는뜻
+			dataType: "json"
+		}).done(function(resp) {
+			alert("회원수정이 완료되었습니다");
+			console.log(resp);
+			location.href = "/";
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	}, 
 	//로그인시작
 	login: function() {
 		//alert('user의 save함수 호출됨');

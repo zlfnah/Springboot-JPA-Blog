@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authorize access="isAuthenticated()"><!--인증이 되있는지 안되있는지 확인  -->
 <sec:authentication property="principal" var="principal" /> <!--property="principal" =direct하게 오브젝트에 바로 접속가능하게함.  -->
-</sec:authorize>
+</sec:authorize><!--현재 세션으로 저장된 로그인한 객체가principal이름으로 들어가있음  위에  principal=principalDetail임 -->
 
 
 <!DOCTYPE html>
