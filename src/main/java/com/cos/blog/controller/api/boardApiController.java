@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,18 +33,15 @@ public class boardApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); //리턴값.  아마200뜰거임 자바오브젝트를 json으로 변환해서 리턴(Jackson)
 		
 	}
-	/*
-	 * //옛날방식의 로그인!!
-	 * 
-	 * @PostMapping("/api/user/login") 
-	 * public ResponseDto<Integer>login(@RequestBody User user, HttpSession session){ //세션호출 위에 , @Autowired private HttpSession session; 없이
-	 * ResponseDto매개변수에 HttpSession session적어도 가능
-	 * 
-	 * System.out.println("UserApiController : login호출됨"); User principal =
-	 * userService.로그인(user); //principal(접근주체) if(principal!=null) { //세션실행
-	 * session.setAttribute("principal", principal); } return new
-	 * ResponseDto<Integer>(HttpStatus.OK.value(),1); //리턴값. 아마200뜰거임 자바오브젝트를 json으로
-	 * 변환해서 리턴(Jackson) }
-	 */
 	
+	@DeleteMapping("/api/board/{id}")
+	public ResponseDto<Integer> deleteById(@PathVariable int id){
+		boardService.글삭제하기(id);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); 
+	}
+	@PutMapping("/api/board/{id}") 
+	public ResponseDto<Integer>update(@PathVariable int id, @RequestBody Board board){
+		boardService.글수정하기(id,board);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	}
 }

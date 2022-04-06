@@ -2,18 +2,19 @@
 <%@include file="../layout/header.jsp"%>
 <!-- ctrl+shift+f -->
 <div class="container">
+
 	<form>
-		<!--  action="/blog/api/user/login"는 옛날방식 -->
+	<input type="hidden" id="id" value="${board.id}">
 		<div class="form-group">
-		<input type="text" class="form-control" placeholder="Enter title" id="title">
+			<input type="text" class="form-control" placeholder="Enter title" id="title" value="${board.title}"><!--모델데이터를 갖고오기위해 value사용  -->
 		</div>
 
 		<div class="form-group">
-	
-			<textarea class="form-control summernote" rows="5" id="content"></textarea>
+		
+			<textarea class="form-control summernote" rows="5" id="content">${board.content}</textarea>
 		</div>
 	</form>
-		<button id="btn-save" class="btn btn-primary">글쓰기완료</button> <!-- Json요청을위해 폼태그 밖으로 뺌 -->
+		<button id="btn-update" class="btn btn-primary">글수정완료</button> <!-- Json요청을위해 폼태그 밖으로 뺌 -->
 
 </div>
  <script> 
