@@ -27,3 +27,11 @@ public class PrincipalDetaillService implements UserDetailsService {
 		return new PrincipalDetail(principal); //security 세션에 유저 정보가 저장이 됨. 아이디:user, 패스워드:콘솔창
 	}
 }
+
+/*로그인요청시
+ * 인증필터가 낚아챈뒤 토큰을만듬(토큰은 아이디랑 비번토대로 만듬)
+ * 이 토큰은 AuthenticationManger에 던짐(Authentication객체를 만들기위해)
+ * 객체를 만들기위한 조건은 db에 아이디가 있는지 비번이있는지
+ * 확인 후 객체를만듬 그 뒤 세션에 저장
+ * 
+ * */

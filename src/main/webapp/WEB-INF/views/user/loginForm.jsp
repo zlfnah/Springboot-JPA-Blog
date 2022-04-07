@@ -13,6 +13,7 @@
 		</div>
 
 		<button id="btn-login" class="btn btn-primary">로그인</button>
+		<a href="#"><img height="38px" src="/image/kakao_login_button.png" /></a>
 	</form>
 
 </div>

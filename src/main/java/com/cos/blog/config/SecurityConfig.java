@@ -3,6 +3,7 @@ package com.cos.blog.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -21,6 +22,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private PrincipalDetaillService principalDetaillService; //애를 통해서 패스워드를 인코드해서 알아서 비교하게 해줌
 	
+	
+	@Bean
+	@Override
+	public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
+	}
+
 	@Bean //IoC가 된다.
 	public BCryptPasswordEncoder encodePWD() {//BCryptPasswordEncoder=sercurity가 갖고있는 함수
 		//String encPassword = new BCryptPasswordEncoder().encode("1245"); //encode()에 매개변수를 인코드해서 encPassword함수로넣는다.

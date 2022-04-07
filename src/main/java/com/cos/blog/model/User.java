@@ -45,7 +45,7 @@ public class User {
 	@Column(nullable = false,length=50) 
 	private String address;
 	
-	@Column(nullable = false,length=50) 
+	@Column(nullable = false,length=50)
 	private String address_details;
 	
 	

@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +25,8 @@ public class UserService {
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder; //보안걸기
+	
+
 	
 	@Transactional // 서비스는 하나의 트랜잭션이상을 가질수있다. 트랜잭션이란?:일이 처리되기 위한 가장 작은 단위. 정리:스프링할때 select할때도 트랜잭션을 붙인다 왜? 정합성을 위해
 	public void 회원가입(User user) {
@@ -43,9 +49,10 @@ public class UserService {
 		String encPassword=encoder.encode(rawPssword);
 		persistance.setPassword(encPassword);
 		persistance.setEmail(user.getEmail());
-		
 		persistance.setAddress(user.getAddress());
 		persistance.setAddress_details(user.getAddress_details());
+		
+		
 		//회원수정 함수 종료시 = 서비스 종료 = 트랜잭션 종료 = commit 이 자동으로 됨
 		//영속화된 persistance 객체의 변화가 감지되면 더티체킹이 되어 변화된것들을 update문을 날려줌.
 	}
