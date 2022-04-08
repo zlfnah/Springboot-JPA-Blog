@@ -13,9 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,7 +52,9 @@ public class Board { //게시판
 	//FetchType.LAZY갖고올수도 안 갖고올수도있다
 	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)//mappedBy뜻 연관관계의 주인이 아니다(난 fk가 아니다)db에 컬럼을 만들지 말아주세요뜻 reply테이블에 board가 fk다 reply클래스에있는 board필드를적는다
 	//하나의 개시글은 여러개의 댓글이있을수있다. fk설정이 필요없는이유는 1정규화가깨짐
-	private List<Reply> reply; //댓글은1개이상 즉 여러개일수도있어서 List유틸쓴다
+	@JsonIgnoreProperties({"board"})//@JsonIgnoreProperties어노테이션 덕분에 board에있는 board게터생성이 안된다
+	@OrderBy("id desc")//댓글목록 내림차순정렬
+	private List<Reply> replys; //댓글은1개이상 즉 여러개일수도있어서 List유틸쓴다
 	
 	@CreationTimestamp
 	private Timestamp createDate;

@@ -9,17 +9,18 @@
 			<label for="username">username</label> 
 			<input type="text" class="form-control" placeholder="Enter username" id="username" readonly value="${principal.user.username}">
 		</div>
-		
+		<!--oauth값이 있으면 수정을 못하게함.  -->
+		<c:if test="${empty principal.user.oauth}"> 
 		<div class="form-group">
 			<label for="password">Password</label> 
 			<input type="password" class="form-control" placeholder="Enter password" id="password" >
 		</div>
-		
+
 		<div class="form-group">
 			<label for="email">Email</label> 
 			<input type="email" class="form-control" placeholder="Enter email" id="email" value="${principal.user.email}">
 		</div>
-		
+	
 		<div class="form-group">
 			<label for="address">Address</label> 
 			<input type="text" class="form-control" placeholder="Enter address" id="address" readonly="readonly" value="${principal.user.address}">
@@ -28,7 +29,7 @@
 		<div class="form-group">
 			<label for="AddressDetails">AddressDetails</label> 
 			<input type="text" class="form-control" placeholder="Enter AddressDetails" id="address_details" value="${principal.user.address_details}">
-		</div>
+		</div></c:if>
 		
 	</form>
 	

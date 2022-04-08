@@ -26,7 +26,13 @@ public class UserService {
 	@Autowired
 	private BCryptPasswordEncoder encoder; //보안걸기
 	
-
+	@Transactional(readOnly = true)
+		public User 회원찾기(String username) {
+			User user = userRepository.findByUsername(username).orElseGet(()->{//orElseGet은 만약 회원이 없을경우는 빈 객체를 찾아라
+			return new User();
+			});
+			return user;
+	}
 	
 	@Transactional // 서비스는 하나의 트랜잭션이상을 가질수있다. 트랜잭션이란?:일이 처리되기 위한 가장 작은 단위. 정리:스프링할때 select할때도 트랜잭션을 붙인다 왜? 정합성을 위해
 	public void 회원가입(User user) {
@@ -45,12 +51,17 @@ public class UserService {
 		User persistance=userRepository.findById(user.getId()).orElseThrow(()->{
 			return new IllegalArgumentException("회원찾기실패");
 		});
-		String rawPssword= user.getPassword();
-		String encPassword=encoder.encode(rawPssword);
-		persistance.setPassword(encPassword);
-		persistance.setEmail(user.getEmail());
-		persistance.setAddress(user.getAddress());
-		persistance.setAddress_details(user.getAddress_details());
+		
+		//Validate체크 =>oauth에 필드 값이 없으면 수정 가능
+		if(persistance.getOauth()==null || persistance.getOauth().equals("")) { //getOauth가 비어있거나 없을경우
+			String rawPssword= user.getPassword();
+			String encPassword=encoder.encode(rawPssword);
+			persistance.setPassword(encPassword);
+			persistance.setEmail(user.getEmail());
+			persistance.setAddress(user.getAddress());
+			persistance.setAddress_details(user.getAddress_details());
+		}
+	
 		
 		
 		//회원수정 함수 종료시 = 서비스 종료 = 트랜잭션 종료 = commit 이 자동으로 됨

@@ -35,4 +35,6 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+cos:
+  key: cos1234 #절대 노출되면 안되는 키 UserController에서씀
       
