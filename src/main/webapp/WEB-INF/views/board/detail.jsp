@@ -27,23 +27,28 @@
 	<hr />
 
 	<div class="card">
+		<form>
+		<input type="hidden" id="userId" value="${principal.user.id}">
+		<input type="hidden" id="boardId"value="${board.id}">
 		<div class="card-body">
 			<textarea rows="1" class="form-control" id="reply-content"></textarea>
 		</div>
 		<div class="card-footer">
-			<button class="btn btn-primary" id="btn-reply-save">등록</button>
+			<button class="btn btn-primary" id="btn-reply-save" type="button">등록</button>
 		</div>
+		</form>
 	</div>
 	<br />
 	<div class="card">
 		<div class="card-header">댓글 리스트</div>
-		<ul class="list-group" id="reply--box">
+		<ul class="list-group" id="reply-box">
 		<c:forEach var="reply" items="${board.replys}">
-		<li class="list-group-item d-flex justify-content-between" id="reply--1">
-				<div>${reply.content }</div>
+		
+		<li class="list-group-item d-flex justify-content-between" id="reply-${reply.id}">
+				<div>${reply.content}</div>
 				<div class="d-flex">
 					<div class="font-italic">작성자: ${reply.user.username} &nbsp;</div>
-					<button class="badge">삭제</button>
+					<button class="badge" onclick="index.replyDelete(${board.id},${reply.id})">삭제</button>
 				</div>
 			</li>
 		</c:forEach>

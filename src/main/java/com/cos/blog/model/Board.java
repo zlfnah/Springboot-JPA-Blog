@@ -3,6 +3,7 @@ package com.cos.blog.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,7 +51,7 @@ public class Board { //게시판
 	private User user; //db는 오브젝트를 저장할 수 없다 FK, 자바는 오브젝트를 저장할 수 있다.
 	
 	//FetchType.LAZY갖고올수도 안 갖고올수도있다
-	@OneToMany(mappedBy = "board", fetch = FetchType.LAZY)//mappedBy뜻 연관관계의 주인이 아니다(난 fk가 아니다)db에 컬럼을 만들지 말아주세요뜻 reply테이블에 board가 fk다 reply클래스에있는 board필드를적는다
+	@OneToMany(mappedBy = "board", fetch = FetchType.EAGER,cascade=CascadeType.REMOVE)//mappedBy뜻 연관관계의 주인이 아니다(난 fk가 아니다)db에 컬럼을 만들지 말아주세요뜻 reply테이블에 board가 fk다 reply클래스에있는 board필드를적는다
 	//하나의 개시글은 여러개의 댓글이있을수있다. fk설정이 필요없는이유는 1정규화가깨짐
 	@JsonIgnoreProperties({"board"})//@JsonIgnoreProperties어노테이션 덕분에 board에있는 board게터생성이 안된다
 	@OrderBy("id desc")//댓글목록 내림차순정렬

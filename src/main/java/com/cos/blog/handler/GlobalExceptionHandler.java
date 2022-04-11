@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
 	
 	@ExceptionHandler(value = Exception.class) //Exception이 가장 부모 클래스라 모든 오류가 일로나옴
 	public ResponseDto<String> handleArgumentException(Exception e) {
-		return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()); 
+		return new ResponseDto<String>(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage()); //500값
 		
 	}
 }

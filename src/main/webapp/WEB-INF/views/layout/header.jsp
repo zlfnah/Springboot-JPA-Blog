@@ -37,12 +37,16 @@
 					</ul>
 				</c:when>
 				<c:otherwise> <%--세션이 있을때!  --%>
+				<div>
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link" href="/board/saveForm">글쓰기</a></li>
 						<li class="nav-item"><a class="nav-link" href="/user/updateForm">회원정보</a></li>
 						<li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
- 
+						<li class="nav-item"><span class="nav-link float-right"> ${principal.user.username}님 반갑습니다!</span> </li>
 					</ul>
+				
+	
+					</div>
 				</c:otherwise>
 			</c:choose>
 		
